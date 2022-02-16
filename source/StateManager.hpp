@@ -7,8 +7,6 @@ class StateManager
 public:
 	StateManager(sf::RenderWindow* window);
 
-
-
 private:
 	sf::RenderWindow* window;
 };

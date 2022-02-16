@@ -6,6 +6,7 @@
 class MenuGameState : public GameState
 {
 public:
+	MenuGameState(sf::RenderWindow* window);
 	void Init();
 	void HandleInput(sf::Event event);
 	void Draw();
