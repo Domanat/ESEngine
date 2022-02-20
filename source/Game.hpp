@@ -1,31 +1,31 @@
 #ifndef GAME_HPP
 #define GAME_HPP
 
-#include "Engine.hpp"
-#include <string>
-#include <thread>
+//#include "Window.h"
+//#include "EventManager.h"
+#include "StateManager.hpp"
+#include <iostream>
 
-class Game
+class Game 
 {
 public:
 	Game();
+	~Game();
 
-	void Start();
-	void Pause();
-	void Resume();
-	void Stop();
+	void Update();
+	void Render();
+	void LateUpdate();
 
+	sf::Time GetElapsed();
+
+	sf::RenderWindow* GetWindow();
 private:
-	Engine engine;
 
-	//Keep all textures
-	/*std::map<std::string, sf::Texture> backgroundsTextures;
-	std::map<std::string, sf::Sprite> backgroundsSprites;
+	void RestartClock();
 
-	std::map<std::string, sf::Texture> characters;
-	std::map<std::string, sf::Sprite> charactersSprites;*/
-
-
+	sf::RenderWindow window;
+	StateManager stateManager;
+	sf::Clock clock;
+	sf::Time elapsed;
 };
-
 #endif

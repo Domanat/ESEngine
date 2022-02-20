@@ -1,28 +1,44 @@
 #include "Game.hpp"
 
-Game::Game()
+Game::Game() :
+	window(sf::VideoMode(800, 600), "Test"),
+	stateManager(&window)
 {
-	//Load textures
-	//Init engine
-	engine.Init();
+	stateManager.SwitchTo(StateType::MainMenu);
 }
 
-void Game::Start()
-{
+Game::~Game() { }
 
+void Game::Update()
+{
+	//window.update();
+	stateManager.Update(elapsed);
 }
 
-void Game::Pause()
+void Game::Render()
 {
-
+	//window.BeginDraw();
+	stateManager.Draw();
+	//window.EndDraw();
 }
 
-void Game::Resume()
+void Game::LateUpdate()
 {
-
+	stateManager.ProcessRequests();
+	RestartClock();
 }
 
-void Game::Stop()
+sf::RenderWindow* Game::GetWindow()
 {
+	return &window;
+}
 
+sf::Time Game::GetElapsed() 
+{ 
+	return clock.getElapsedTime(); 
+}
+
+void Game::RestartClock()
+{ 
+	elapsed = clock.restart(); 
 }
