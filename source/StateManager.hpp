@@ -1,21 +1,20 @@
 #ifndef STATEMANAGER_HPP
 #define STATEMANAGER_HPP
-#include "MenuState.hpp"
+#include "IntroState.hpp"
 #include "BaseState.hpp"
-
+#include "Window.hpp"
 #include <unordered_map>
 #include <functional>
 
 enum class StateType
 {
-	MainMenu = 1, Game, Paused, GameOver, Win
+	Intro = 1, MainMenu, Game, Paused, GameOver, Win
 };
-
 
 class StateManager
 {
 public:
-	StateManager(sf::RenderWindow* window);
+	StateManager(Window* window);
 	~StateManager();
 
 	void Update(const sf::Time& time);
@@ -24,7 +23,8 @@ public:
 	// Delete all states which has to be deleted in the end
 	void ProcessRequests();
 
-	sf::RenderWindow* GetWindow();
+	sf::RenderWindow* GetRenderWindow();
+	EventManager* GetEventManager();
 
 	bool HasState(const StateType& type);
 
@@ -39,13 +39,13 @@ private:
 	template<class T>
 	void RegisterState(const StateType& type)
 	{
-		statesFactory[type] = [this]()->BaseState*
+		statesFactory[type] = [this]() -> BaseState*
 		{
 			return new T(this);
-		}
+		};
 	}
 
-	sf::RenderWindow* window;
+	Window* window;
 	std::vector<std::pair<StateType, BaseState*>> states;
 	// States to be removed
 	std::vector<StateType> toRemove;

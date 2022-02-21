@@ -4,7 +4,14 @@
 //#include "Window.h"
 //#include "EventManager.h"
 #include "StateManager.hpp"
+#include "Window.hpp"
 #include <iostream>
+
+struct SharedContext
+{
+	EventManager* eventManager;
+	Window* window;
+};
 
 class Game 
 {
@@ -18,14 +25,16 @@ public:
 
 	sf::Time GetElapsed();
 
-	sf::RenderWindow* GetWindow();
-private:
-
+	Window* GetWindow();
 	void RestartClock();
 
-	sf::RenderWindow window;
+private:
+
 	StateManager stateManager;
+	Window window;
+	SharedContext sharedContext;
 	sf::Clock clock;
 	sf::Time elapsed;
+	sf::Vector2i speed;
 };
 #endif

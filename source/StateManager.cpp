@@ -1,9 +1,9 @@
 #include "StateManager.hpp"
 
-StateManager::StateManager(sf::RenderWindow* window) :
+StateManager::StateManager(Window* window) :
 	window(window)
 {
-	RegisterState<MenuState>(StateType::MainMenu);
+	RegisterState<IntroState>(StateType::Intro);
 	/*RegisterState<PauseState>(StateType::Paused);
 	RegisterState<GameState>(StateType::Game);
 	RegisterState<LostState>(StateType::GameOver);
@@ -42,9 +42,14 @@ void StateManager::Update(const sf::Time& time)
 	}
 }
 
-sf::RenderWindow* StateManager::GetWindow()
+sf::RenderWindow* StateManager::GetRenderWindow()
 {
-	return window;
+	return window->GetRenderWindow();
+}
+
+EventManager* StateManager::GetEventManager()
+{
+	return window->GetEventManager();
 }
 
 bool StateManager::HasState(const StateType& type)

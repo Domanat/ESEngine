@@ -19,19 +19,23 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\source\BaseState.hpp" />
     <ClInclude Include="..\..\source\Constants.hpp" />
-    <ClInclude Include="..\..\source\Engine.hpp" />
+    <ClInclude Include="..\..\source\EventManager.hpp" />
     <ClInclude Include="..\..\source\Game.hpp" />
-    <ClInclude Include="..\..\source\GameState.hpp" />
-    <ClInclude Include="..\..\source\MenuGameState.hpp" />
+    <ClInclude Include="..\..\source\IntroState.hpp" />
+    <ClInclude Include="..\..\source\MenuState.hpp" />
     <ClInclude Include="..\..\source\StateManager.hpp" />
+    <ClInclude Include="..\..\source\Window.hpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\source\Engine.cpp" />
+    <ClCompile Include="..\..\source\EventManager.cpp" />
     <ClCompile Include="..\..\source\Game.cpp" />
+    <ClCompile Include="..\..\source\IntroState.cpp" />
     <ClCompile Include="..\..\source\main.cpp" />
-    <ClCompile Include="..\..\source\MenuGameState.cpp" />
+    <ClCompile Include="..\..\source\MenuState.cpp" />
     <ClCompile Include="..\..\source\StateManager.cpp" />
+    <ClCompile Include="..\..\source\Window.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>

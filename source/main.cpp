@@ -3,7 +3,13 @@
 int main()
 {
 	Game game;
-	game.Start();
+
+	while (!game.GetWindow()->IsDone())
+	{
+		game.Update();
+		game.Render();
+		game.RestartClock();
+	}
 
 	return 0;
 }

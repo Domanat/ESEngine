@@ -1,25 +1,33 @@
 #include "Game.hpp"
 
 Game::Game() :
-	window(sf::VideoMode(800, 600), "Test"),
+	window(sf::Vector2u(800, 600), "Window"),
 	stateManager(&window)
 {
-	stateManager.SwitchTo(StateType::MainMenu);
+	clock.restart();
+	srand(time(NULL));
+
+	sharedContext.window = &window;
+	sharedContext.eventManager = window.GetEventManager();
+	
+	stateManager.SwitchTo(StateType::Intro);
+	speed = sf::Vector2i(400, 400);
 }
 
 Game::~Game() { }
 
 void Game::Update()
 {
-	//window.update();
+	window.Update();
 	stateManager.Update(elapsed);
 }
 
 void Game::Render()
 {
-	//window.BeginDraw();
+	window.BeginDraw();
+	//window.Draw(mushroom);
 	stateManager.Draw();
-	//window.EndDraw();
+	window.EndDraw();
 }
 
 void Game::LateUpdate()
@@ -28,7 +36,7 @@ void Game::LateUpdate()
 	RestartClock();
 }
 
-sf::RenderWindow* Game::GetWindow()
+Window* Game::GetWindow()
 {
 	return &window;
 }

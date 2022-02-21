@@ -17,7 +17,6 @@ public:
 	virtual ~BaseState() {}
 
 	virtual void OnCreate() = 0;
-	virtual void OnRemove() = 0;
 	virtual void OnDestroy() = 0;
 
 	// Set state to the top on the stack
