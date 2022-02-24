@@ -25,6 +25,7 @@
     <ClInclude Include="..\..\source\Game.hpp" />
     <ClInclude Include="..\..\source\IntroState.hpp" />
     <ClInclude Include="..\..\source\MenuState.hpp" />
+    <ClInclude Include="..\..\source\SharedContext.hpp" />
     <ClInclude Include="..\..\source\StateManager.hpp" />
     <ClInclude Include="..\..\source\Window.hpp" />
   </ItemGroup>

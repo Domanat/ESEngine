@@ -1,7 +1,7 @@
 #include "StateManager.hpp"
 
-StateManager::StateManager(Window* window) :
-	window(window)
+StateManager::StateManager(SharedContext* sharedContext) :
+	sharedContext(sharedContext)
 {
 	RegisterState<IntroState>(StateType::Intro);
 	/*RegisterState<PauseState>(StateType::Paused);
@@ -25,31 +25,36 @@ void StateManager::Draw()
 	if (states.empty())
 		return;
 
-	for (auto itr = states.end(); itr != states.begin(); itr--)
+	for (int i = 0; i < states.size(); i++)
+	{
+		states[i].second->Draw();
+	}
+
+	/*for (auto itr = states.end(); itr != states.begin(); itr--)
 	{
 		itr->second->Draw();
-	}
+	}*/
 }
 
 void StateManager::Update(const sf::Time& time)
 {
 	if (states.empty())
 		return;
+	
+	for (int i = 0; i < states.size(); i++)
+	{
+		states[i].second->Update(time);
+	}
 
-	for (auto itr = states.end(); itr != states.begin(); itr--)
+	/*for (auto itr = states.end(); itr != states.begin(); itr--)
 	{
 		itr->second->Update(time);
-	}
+	}*/
 }
 
-sf::RenderWindow* StateManager::GetRenderWindow()
+SharedContext* StateManager::GetSharedContext()
 {
-	return window->GetRenderWindow();
-}
-
-EventManager* StateManager::GetEventManager()
-{
-	return window->GetEventManager();
+	return sharedContext;
 }
 
 bool StateManager::HasState(const StateType& type)
@@ -88,7 +93,7 @@ void StateManager::ProcessRequests()
 
 void StateManager::SwitchTo(const StateType& type)
 {
-	//EventManager->setCurrentState(type);
+	sharedContext->eventManager->SetCurrentState(type);
 	for (auto itr = states.begin(); itr != states.end(); itr++)
 	{
 		if (itr->first == type)

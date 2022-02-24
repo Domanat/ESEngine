@@ -3,8 +3,10 @@
 #include "IntroState.hpp"
 #include "BaseState.hpp"
 #include "Window.hpp"
+#include "SharedContext.hpp"
 #include <unordered_map>
 #include <functional>
+
 
 enum class StateType
 {
@@ -14,7 +16,7 @@ enum class StateType
 class StateManager
 {
 public:
-	StateManager(Window* window);
+	StateManager(SharedContext* sharedContext);
 	~StateManager();
 
 	void Update(const sf::Time& time);
@@ -23,8 +25,7 @@ public:
 	// Delete all states which has to be deleted in the end
 	void ProcessRequests();
 
-	sf::RenderWindow* GetRenderWindow();
-	EventManager* GetEventManager();
+	SharedContext* GetSharedContext();
 
 	bool HasState(const StateType& type);
 
@@ -45,7 +46,7 @@ private:
 		};
 	}
 
-	Window* window;
+	SharedContext* sharedContext;
 	std::vector<std::pair<StateType, BaseState*>> states;
 	// States to be removed
 	std::vector<StateType> toRemove;

@@ -10,12 +10,7 @@ void IntroState::OnCreate()
 {
 	timePassed = 0.0f;
 
-	//sf::Vector2u windowSize = stateManager->GetRenderWindow()->getSize();
-
-	//Error here
-	sf::Vector2u windowSize = stateManager->GetRenderWindow()->getSize();
-	//----------------
-
+	sf::Vector2u windowSize = stateManager->GetSharedContext()->window->GetRenderWindow()->getSize();
 
 	introTexture.loadFromFile("intro.png");
 	introSprite.setTexture(introTexture);
@@ -36,13 +31,13 @@ void IntroState::OnCreate()
 
 	text.setPosition(windowSize.x / 2.0f, windowSize.y / 2.0f);
 
-	EventManager* evMgr = stateManager->GetEventManager();
+	EventManager* evMgr = stateManager->GetSharedContext()->eventManager;
 	evMgr->AddCallback(StateType::Intro, "Intro_Continue", &IntroState::Continue, this);
 }
 
 void IntroState::OnDestroy() 
 {
-	EventManager* evMgr = stateManager->GetEventManager();
+	EventManager* evMgr = stateManager->GetSharedContext()->eventManager;
 	evMgr->RemoveCallback(StateType::Intro, "Intro_Continue");
 }
 
@@ -60,7 +55,7 @@ void IntroState::Update(const sf::Time& time)
 
 void IntroState::Draw() 
 {
-	sf::RenderWindow* window = stateManager->GetRenderWindow();
+	sf::RenderWindow* window = stateManager->GetSharedContext()->window->GetRenderWindow();
 
 	window->draw(introSprite);
 

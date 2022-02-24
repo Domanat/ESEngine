@@ -2,7 +2,7 @@
 
 Game::Game() :
 	window(sf::Vector2u(800, 600), "Window"),
-	stateManager(&window)
+	stateManager(&sharedContext)
 {
 	clock.restart();
 	srand(time(NULL));

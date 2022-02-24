@@ -21,7 +21,6 @@ public:
 
 	void Continue(EventDetails* details);
 private:
-	StateManager* stateManager;
 	sf::Texture introTexture;
 	sf::Sprite introSprite;
 	sf::Font font;
