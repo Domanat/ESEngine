@@ -4,15 +4,15 @@ StateManager::StateManager(SharedContext* sharedContext) :
 	sharedContext(sharedContext)
 {
 	RegisterState<IntroState>(StateType::Intro);
+	RegisterState<MenuState>(StateType::MainMenu);
 	/*RegisterState<PauseState>(StateType::Paused);
-	RegisterState<GameState>(StateType::Game);
 	RegisterState<LostState>(StateType::GameOver);
 	RegisterState<WinState>(StateType::Win);*/
 
 }
 
 StateManager::~StateManager()
-{
+{	
 	for (auto& itr : states)
 	{
 		itr.second->OnDestroy();
@@ -29,11 +29,6 @@ void StateManager::Draw()
 	{
 		states[i].second->Draw();
 	}
-
-	/*for (auto itr = states.end(); itr != states.begin(); itr--)
-	{
-		itr->second->Draw();
-	}*/
 }
 
 void StateManager::Update(const sf::Time& time)
@@ -45,11 +40,6 @@ void StateManager::Update(const sf::Time& time)
 	{
 		states[i].second->Update(time);
 	}
-
-	/*for (auto itr = states.end(); itr != states.begin(); itr--)
-	{
-		itr->second->Update(time);
-	}*/
 }
 
 SharedContext* StateManager::GetSharedContext()
@@ -133,10 +123,13 @@ void StateManager::CreateState(const StateType& type)
 
 void StateManager::RemoveState(const StateType& type)
 {
+	
+	std::cout << states.size() << std::endl;
 	for (auto itr = states.begin(); itr != states.end(); itr++)
 	{
 		if (itr->first == type)
 		{
+			std::cout << "Destroying" << std::endl;
 			itr->second->OnDestroy();
 			delete itr->second;
 			states.erase(itr);

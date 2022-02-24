@@ -1,9 +1,11 @@
 #ifndef STATEMANAGER_HPP
 #define STATEMANAGER_HPP
-#include "IntroState.hpp"
 #include "BaseState.hpp"
+#include "IntroState.hpp"
+#include "MenuState.hpp"
 #include "Window.hpp"
 #include "SharedContext.hpp"
+
 #include <unordered_map>
 #include <functional>
 
