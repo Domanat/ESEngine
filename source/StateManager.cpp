@@ -25,9 +25,25 @@ void StateManager::Draw()
 	if (states.empty())
 		return;
 
-	for (int i = 0; i < states.size(); i++)
+	if (states.size() > 1 && states.back().second->IsTransparent())
 	{
-		states[i].second->Draw();
+		auto itr = states.end();
+		while (itr != states.begin())
+		{
+			if (itr != states.end() && !itr->second->IsTransparent())
+				break;
+
+			--itr;
+		}
+
+		for (; itr != states.end(); itr++)
+		{
+			itr->second->Draw();
+		}
+	}
+	else
+	{
+		states.back().second->Draw();
 	}
 }
 
@@ -36,9 +52,26 @@ void StateManager::Update(const sf::Time& time)
 	if (states.empty())
 		return;
 	
-	for (int i = 0; i < states.size(); i++)
+	if (states.size() > 1 && states.back().second->IsTranscendent())
 	{
-		states[i].second->Update(time);
+		auto itr = states.end();
+
+		while (itr != states.begin())
+		{
+			if (itr != states.end() && !itr->second->IsTranscendent())
+				break;
+
+			itr--;
+		}
+
+		for (; itr != states.end(); itr++)
+		{
+			itr->second->Update(time);
+		}
+	}
+	else
+	{
+		states.back().second->Update(time);
 	}
 }
 
@@ -49,9 +82,9 @@ SharedContext* StateManager::GetSharedContext()
 
 bool StateManager::HasState(const StateType& type)
 {
-	for (auto itr : states)
+	for (auto itr = states.begin(); itr != states.end(); itr++)
 	{
-		if (itr.first == type)
+		if (itr->first == type)
 		{
 			auto removed = std::find(toRemove.begin(), toRemove.end(), type);
 
@@ -59,7 +92,6 @@ bool StateManager::HasState(const StateType& type)
 			{
 				return true;
 			}
-
 			return false;
 		}
 	}
@@ -84,18 +116,18 @@ void StateManager::ProcessRequests()
 void StateManager::SwitchTo(const StateType& type)
 {
 	sharedContext->eventManager->SetCurrentState(type);
+	
 	for (auto itr = states.begin(); itr != states.end(); itr++)
 	{
 		if (itr->first == type)
 		{
 			states.back().second->Deactivate();
 			StateType tempType = itr->first;
-			BaseState* tmpState = itr->second;
+			BaseState* tempState = itr->second;
 
 			states.erase(itr);
-			states.emplace_back(tempType, tmpState);
-
-			tmpState->Activate();
+			states.emplace_back(tempType, tempState);
+			tempState->Activate();
 			return;
 		}
 	}
@@ -123,15 +155,13 @@ void StateManager::CreateState(const StateType& type)
 
 void StateManager::RemoveState(const StateType& type)
 {
-	
-	std::cout << states.size() << std::endl;
 	for (auto itr = states.begin(); itr != states.end(); itr++)
 	{
 		if (itr->first == type)
 		{
-			std::cout << "Destroying" << std::endl;
 			itr->second->OnDestroy();
 			delete itr->second;
+
 			states.erase(itr);
 			return;
 		}

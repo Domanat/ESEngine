@@ -230,5 +230,4 @@ void EventManager::LoadBindings()
 	}
 
 	bindings.close();
-	std::cout << "Bindings are succefully loaded" << std::endl;
 }

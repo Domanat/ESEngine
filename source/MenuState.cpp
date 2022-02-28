@@ -28,19 +28,20 @@ void MenuState::OnCreate()
 	buttonPos = sf::Vector2f(400, 200);
 	buttonPadding = 4; // 4px
 
-	std::string str[2];
+	std::string str[3];
 	str[0] = "PLAY";
-	str[1] = "EXIT";
+	str[1] = "CREDITS";
+	str[2] = "EXIT";
 
-	for (int i = 0; i < 2; i++)
+	for (int i = 0; i < 3; i++)
 	{
-		sf::Vector2f buttonPosition(buttonPos.x, buttonPos.y +
-			(i * (buttonSize.y + buttonPadding)));
+		sf::Vector2f buttonPosition(buttonPos.x, buttonPos.y + (i * (buttonSize.y + buttonPadding)));
+		
 		rects[i].setSize(buttonSize);
 		rects[i].setFillColor(sf::Color::Red);
 
-		rects[i].setOrigin(buttonSize.x / 2, buttonSize.y / 2);
-		rects[i].setPosition(buttonPos);
+		rects[i].setOrigin(buttonSize.x / 2.0f, buttonSize.y / 2.0f);
+		rects[i].setPosition(buttonPosition);
 
 		labels[i].setFont(font);
 		labels[i].setString(sf::String(str[i]));
@@ -87,7 +88,7 @@ void MenuState::MouseClick(EventDetails* details)
 	float halfX = buttonSize.x / 2;
 	float halfY = buttonSize.y / 2;
 
-	for (int i = 0; i < 2; i++)
+	for (int i = 0; i < 3; i++)
 	{
 		if (mousePosition.x >= rects[i].getPosition().x - halfX &&
 			mousePosition.x <= rects[i].getPosition().x + halfX &&
@@ -99,6 +100,10 @@ void MenuState::MouseClick(EventDetails* details)
 				stateManager->SwitchTo(StateType::Game);
 			}
 			else if (i == 1)
+			{
+
+			}
+			else if (i == 2)
 			{
 				stateManager->GetSharedContext()->window->Close();
 			}
@@ -117,7 +122,7 @@ void MenuState::Draw()
 
 	window->draw(text);
 
-	for (int i = 0; i < 2; i++)
+	for (int i = 0; i < 3; i++)
 	{
 		window->draw(rects[i]);
 		window->draw(labels[i]);

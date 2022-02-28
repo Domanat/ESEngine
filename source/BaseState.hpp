@@ -27,10 +27,18 @@ public:
 	virtual void Update(const sf::Time& time) = 0;
 	virtual void Draw() = 0;
 
+	void SetTransparent(const bool& value) { isTransparent = value; }
+	bool IsTransparent()const { return isTransparent; }
+	void SetTranscendent(const bool& value) { isTranscendent = value; }
+	bool IsTranscendent()const { return isTranscendent; }
+
 	StateManager* GetStateManager() { return stateManager; }
 
 protected:
 	StateManager* stateManager;
+
+	bool isTransparent;
+	bool isTranscendent;
 };
 
 #endif

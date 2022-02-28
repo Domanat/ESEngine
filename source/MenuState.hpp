@@ -31,8 +31,8 @@ private:
 	sf::Vector2f buttonPos;
 	unsigned int buttonPadding;
 
-	sf::RectangleShape rects[2];
-	sf::Text labels[2];
+	sf::RectangleShape rects[3];
+	sf::Text labels[3];
 };
 
 #endif
