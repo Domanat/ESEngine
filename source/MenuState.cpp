@@ -68,6 +68,7 @@ void MenuState::OnDestroy()
 
 void MenuState::Activate()
 {
+
 	if (stateManager->HasState(StateType::Game) && labels[0].getString() == "PLAY")
 	{
 		labels[0].setString(sf::String("RESUME"));

@@ -3,6 +3,7 @@
 #include "BaseState.hpp"
 #include "IntroState.hpp"
 #include "MenuState.hpp"
+#include "GameState.hpp"
 #include "Window.hpp"
 #include "SharedContext.hpp"
 
