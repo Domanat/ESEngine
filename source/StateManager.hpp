@@ -4,6 +4,7 @@
 #include "IntroState.hpp"
 #include "MenuState.hpp"
 #include "GameState.hpp"
+#include "PauseState.hpp"
 #include "Window.hpp"
 #include "SharedContext.hpp"
 

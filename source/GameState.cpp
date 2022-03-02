@@ -63,7 +63,7 @@ void GameState::MainMenu(EventDetails* details)
 
 void GameState::Pause(EventDetails* details)
 {
-	//stateManager->SwitchTo(StateType::Pause);
+	stateManager->SwitchTo(StateType::Paused);
 }
 
 void GameState::Activate() {}

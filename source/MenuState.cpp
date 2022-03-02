@@ -114,7 +114,26 @@ void MenuState::MouseClick(EventDetails* details)
 
 void MenuState::Update(const sf::Time& time)
 {
+	
+	sf::Vector2i mousePosition = sf::Mouse::getPosition(*stateManager->GetSharedContext()->window->GetRenderWindow());
+	float halfX = buttonSize.x / 2;
+	float halfY = buttonSize.y / 2;
 
+	for (int i = 0; i < 3; i++)
+	{
+		if (mousePosition.x >= rects[i].getPosition().x - halfX &&
+			mousePosition.x <= rects[i].getPosition().x + halfX &&
+			mousePosition.y >= rects[i].getPosition().y - halfY &&
+			mousePosition.y <= rects[i].getPosition().y + halfY)
+		{
+			rects[i].setOutlineColor(sf::Color::White);
+			rects[i].setOutlineThickness(2);
+		}
+		else
+		{
+			rects[i].setOutlineThickness(0);
+		}
+	}
 }
 
 void MenuState::Draw()

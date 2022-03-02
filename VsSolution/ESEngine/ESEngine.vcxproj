@@ -26,6 +26,7 @@
     <ClInclude Include="..\..\source\GameState.hpp" />
     <ClInclude Include="..\..\source\IntroState.hpp" />
     <ClInclude Include="..\..\source\MenuState.hpp" />
+    <ClInclude Include="..\..\source\PauseState.hpp" />
     <ClInclude Include="..\..\source\SharedContext.hpp" />
     <ClInclude Include="..\..\source\StateManager.hpp" />
     <ClInclude Include="..\..\source\Window.hpp" />
@@ -37,6 +38,7 @@
     <ClCompile Include="..\..\source\IntroState.cpp" />
     <ClCompile Include="..\..\source\main.cpp" />
     <ClCompile Include="..\..\source\MenuState.cpp" />
+    <ClCompile Include="..\..\source\PauseState.cpp" />
     <ClCompile Include="..\..\source\StateManager.cpp" />
     <ClCompile Include="..\..\source\Window.cpp" />
   </ItemGroup>
