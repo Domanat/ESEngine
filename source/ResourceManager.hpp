@@ -4,6 +4,8 @@
 #include <unordered_map>
 #include <fstream>
 #include <iostream>
+#include <string>
+#include <sstream>
 #include "Utils.hpp"
 
 template <typename Derived, typename T>

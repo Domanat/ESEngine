@@ -14,11 +14,6 @@ AnimationBase::~AnimationBase()
 
 }
 
-void AnimationBase::SetSpriteSheet(SpriteSheet* sheet)
-{
-	spriteSheet = sheet;
-}
-
 void AnimationBase::SetFrame(int frame)
 {
 	if ((frame >= frameStart && frame <= frameEnd) ||

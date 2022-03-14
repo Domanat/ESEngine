@@ -3,8 +3,10 @@
 
 #include "SFML/Graphics.hpp"
 #include "AnimationBase.hpp"
+#include "AnimationDirectional.hpp"
 #include "TextureManager.hpp"
 #include "Direction.hpp"
+#include <fstream>
 
 class SpriteSheet
 {
