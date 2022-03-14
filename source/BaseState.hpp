@@ -7,9 +7,12 @@ class StateManager;
 
 class BaseState
 {
+	friend class StateManager;
 public:
 	BaseState(StateManager* stateManager) :
-		stateManager(stateManager)
+		stateManager(stateManager),
+		isTranscendent(false),
+		isTransparent(false)
 	{
 
 	}
@@ -34,11 +37,13 @@ public:
 
 	StateManager* GetStateManager() { return stateManager; }
 
+	sf::View& GetView() { return view; }
+
 protected:
 	StateManager* stateManager;
-
 	bool isTransparent;
 	bool isTranscendent;
+	sf::View view;
 };
 
 #endif

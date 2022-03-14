@@ -64,6 +64,15 @@ sf::RenderWindow* Window::GetRenderWindow() { return &window; }
 EventManager* Window::GetEventManager() { return &eventManager; }
 sf::Vector2u Window::GetWindowSize() { return windowSize; }
 
+sf::FloatRect Window::GetViewSpace()
+{
+	sf::Vector2f viewCenter = window.getView().getCenter();
+	sf::Vector2f viewSize = window.getView().getSize();
+	sf::Vector2f viewSizeHalf(viewSize.x / 2, viewSize.y / 2);
+	sf::FloatRect viewSpace(viewCenter - viewSizeHalf, viewSize);
+	return viewSpace;
+}
+
 void Window::ToggleFullscreen(EventDetails* details)
 {
 	isFullscreen = !isFullscreen;

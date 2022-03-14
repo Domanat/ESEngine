@@ -39,6 +39,7 @@ void StateManager::Draw()
 
 		for (; itr != states.end(); itr++)
 		{
+			sharedContext->window->GetRenderWindow()->setView(itr->second->GetView());
 			itr->second->Draw();
 		}
 	}
@@ -129,6 +130,8 @@ void StateManager::SwitchTo(const StateType& type)
 			states.erase(itr);
 			states.emplace_back(tempType, tempState);
 			tempState->Activate();
+
+			sharedContext->window->GetRenderWindow()->setView(tempState->GetView());
 			return;
 		}
 	}
@@ -140,6 +143,7 @@ void StateManager::SwitchTo(const StateType& type)
 
 	CreateState(type);
 	states.back().second->Activate();
+	sharedContext->window->GetRenderWindow()->setView(states.back().second->GetView());
 }
 
 void StateManager::CreateState(const StateType& type)
@@ -149,7 +153,9 @@ void StateManager::CreateState(const StateType& type)
 	if (newState == statesFactory.end())
 		return;
 	
+
 	BaseState* state = newState->second();
+	state->view = sharedContext->window->GetRenderWindow()->getDefaultView();
 	states.emplace_back(type, state);
 	state->OnCreate();
 }
