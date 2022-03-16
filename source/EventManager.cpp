@@ -105,6 +105,7 @@ void EventManager::HandleEvent(sf::Event& l_event)
 	}
 }
 
+// If any of the keys are pressed add to the callbacks
 void EventManager::Update() 
 {
 	if (!m_hasFocus) { return; }
@@ -153,6 +154,7 @@ void EventManager::Update()
 				if (callItr != stateCallbacks->second.end())
 				{
 					// Pass in information about events.
+					// Pass EventDetails to the CallbackContainer
 					callItr->second(&bind->m_details);
 				}
 			}
