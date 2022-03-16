@@ -28,6 +28,7 @@
     <ClInclude Include="..\..\source\Game.hpp" />
     <ClInclude Include="..\..\source\GameState.hpp" />
     <ClInclude Include="..\..\source\IntroState.hpp" />
+    <ClInclude Include="..\..\source\Map.hpp" />
     <ClInclude Include="..\..\source\MenuState.hpp" />
     <ClInclude Include="..\..\source\PauseState.hpp" />
     <ClInclude Include="..\..\source\ResourceManager.hpp" />
@@ -46,6 +47,7 @@
     <ClCompile Include="..\..\source\GameState.cpp" />
     <ClCompile Include="..\..\source\IntroState.cpp" />
     <ClCompile Include="..\..\source\main.cpp" />
+    <ClCompile Include="..\..\source\Map.cpp" />
     <ClCompile Include="..\..\source\MenuState.cpp" />
     <ClCompile Include="..\..\source\PauseState.cpp" />
     <ClCompile Include="..\..\source\SpriteSheet.cpp" />
