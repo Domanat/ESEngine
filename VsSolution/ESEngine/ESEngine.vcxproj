@@ -24,6 +24,7 @@
     <ClInclude Include="..\..\source\BaseState.hpp" />
     <ClInclude Include="..\..\source\Constants.hpp" />
     <ClInclude Include="..\..\source\Direction.hpp" />
+    <ClInclude Include="..\..\source\EntityBase.hpp" />
     <ClInclude Include="..\..\source\EventManager.hpp" />
     <ClInclude Include="..\..\source\Game.hpp" />
     <ClInclude Include="..\..\source\GameState.hpp" />
@@ -42,6 +43,7 @@
   <ItemGroup>
     <ClCompile Include="..\..\source\AnimationBase.cpp" />
     <ClCompile Include="..\..\source\AnimationDirectional.cpp" />
+    <ClCompile Include="..\..\source\EntityBase.cpp" />
     <ClCompile Include="..\..\source\EventManager.cpp" />
     <ClCompile Include="..\..\source\Game.cpp" />
     <ClCompile Include="..\..\source\GameState.cpp" />

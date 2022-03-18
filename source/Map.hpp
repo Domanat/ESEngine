@@ -72,7 +72,7 @@ public:
 	float GetGravity() const;
 	unsigned int GetTileSize() const;
 	const sf::Vector2u& GetMapSize() const;
-	const sf::Vector2u& GetPlayerStart() const;
+	const sf::Vector2f& GetPlayerStart() const;
 	void LoadMap(const std::string& path);
 	void LoadNext();
 	void Update(float dt);
