@@ -1,7 +1,7 @@
 #include "Map.hpp"
 
 Map::Map(SharedContext* sharedContext, BaseState* currState) :
-	context(sharedContext), defaultTile(context), maxMapSize(32, 32),
+	context(sharedContext), defaultTile(sharedContext), maxMapSize(32, 32),
 	tileCount(0), tileSetCount(0), mapGravity(512.f), loadNextMap(false),
 	currentState(currState)
 {
@@ -255,7 +255,7 @@ void Map::LoadMap(const std::string& path)
 		}
 		else if (type == "DEFAULT_FRICTION") 
 		{
-			keystream >> defaultTile->friction.x >> defaultTile->friction.y;
+			keystream >> defaultTile.friction.x >> defaultTile.friction.y;
 		}
 		else if (type == "NEXTMAP") 
 		{
@@ -266,4 +266,32 @@ void Map::LoadMap(const std::string& path)
 	file.close();
 }
 
-void Map::LoadNext() { loadNextMap = true; }
+const sf::Vector2u& Map::GetMapSize() const
+{
+	return maxMapSize;
+}
+
+const sf::Vector2f& Map::GetPlayerStart() const
+{
+	return playerStart;
+}
+
+unsigned int Map::GetTileSize() const
+{
+	return Sheet::TileSize;
+}
+
+TileInfo* Map::GetDefaultTile() 
+{ 
+	return &defaultTile; 
+}
+
+float Map::GetGravity()const 
+{ 
+	return mapGravity; 
+}
+
+void Map::LoadNext() 
+{ 
+	loadNextMap = true; 
+}

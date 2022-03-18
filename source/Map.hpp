@@ -87,7 +87,7 @@ private:
 	std::unordered_map<int, TileInfo*> tileSet;
 	std::unordered_map<int, Tile*> tileMap;
 	sf::Sprite background;
-	TileInfo* defaultTile;
+	TileInfo defaultTile;
 	sf::Vector2u maxMapSize;
 	sf::Vector2f playerStart;
 	unsigned int tileCount;
