@@ -11,14 +11,18 @@ GameState::~GameState()
 
 void GameState::OnCreate()
 {
-	texture.loadFromFile("Mushroom.png");
-	sprite.setTexture(texture);
-	sprite.setPosition(0, 0);
-	increment = sf::Vector2f(400, 400);
-
 	EventManager* eventManager = stateManager->GetSharedContext()->eventManager;
 	eventManager->AddCallback(StateType::Game, "Key_Escape", &GameState::MainMenu, this);
 	eventManager->AddCallback(StateType::Game, "Key_P", &GameState::Pause, this);
+
+	sf::Vector2u size = stateManager->GetSharedContext()->window->GetWindowSize();
+	view.setSize(size.x, size.y);
+	view.setCenter(size.x / 2, size.y/2);
+	view.zoom(0.6f);
+	stateManager->GetSharedContext()->window->GetRenderWindow()->setView(view);
+
+	gameMap = new Map(stateManager->GetSharedContext(), this);
+	gameMap->LoadMap("media/maps/map1.map");
 }
 
 void GameState::OnDestroy()
@@ -26,29 +30,40 @@ void GameState::OnDestroy()
 	EventManager* eventManager = stateManager->GetSharedContext()->eventManager;
 	eventManager->RemoveCallback(StateType::Game, "Key_Escape");
 	eventManager->RemoveCallback(StateType::Game, "Key_P");
+
+	delete gameMap;
+	gameMap = nullptr;
 }
 
 void GameState::Update(const sf::Time& time)
 {
-	sf::Vector2u windowSize = stateManager->GetSharedContext()->window->GetWindowSize();
-
-	sf::Vector2u textureSize = texture.getSize();
-
-	if ((sprite.getPosition().x > windowSize.x - textureSize.x && increment.x > 0) ||
-		(sprite.getPosition().x < 0 && increment.x < 0))
+	SharedContext* context = stateManager->GetSharedContext();
+	EntityBase* player = context->entityManager->Find("Player");
+	if (!player)
 	{
-		increment.x = -increment.x;
+		std::cout << "Respawning player" << std::endl;
+		context->entityManager->Add(EntityType::Player, "Player");
+		player = context->entityManager->Find("Player");
+		player->SetPosition(gameMap->GetPlayerStart());
+	}
+	else
+	{
+		view.setCenter(player->GetPosition());
+		context->window->GetRenderWindow()->setView(view);
 	}
 
-	if ((sprite.getPosition().y > windowSize.y - textureSize.y && increment.y > 0) ||
-		(sprite.getPosition().y < 0 && increment.y < 0))
-	{
-		increment.y = -increment.y;
+	sf::FloatRect viewSpace = context->window->GetViewSpace();
+	if (viewSpace.left <= 0) {
+		view.setCenter(viewSpace.width / 2, view.getCenter().y);
+		context->window->GetRenderWindow()->setView(view);
+	}
+	else if (viewSpace.left + viewSpace.width > (gameMap->GetMapSize().x + 1) * Sheet::TileSize) {
+		view.setCenter(((gameMap->GetMapSize().x + 1) * Sheet::TileSize) - (viewSpace.width / 2), view.getCenter().y);
+		context->window->GetRenderWindow()->setView(view);
 	}
 
-	sprite.setPosition(sprite.getPosition().x + (increment.x * time.asSeconds()), 
-						sprite.getPosition().y + (increment.y * time.asSeconds()));
-
+	gameMap->Update(time.asSeconds());
+	stateManager->GetSharedContext()->entityManager->Update(time.asSeconds());
 }
 
 void GameState::Draw()

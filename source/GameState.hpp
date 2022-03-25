@@ -4,6 +4,7 @@
 #include "BaseState.hpp"
 #include "StateManager.hpp"
 #include "EventManager.hpp"
+#include "Map.hpp"
 
 class GameState : public BaseState
 {
@@ -24,6 +25,7 @@ public:
 	void Pause(EventDetails* details);
 
 private:
+	Map* gameMap;
 	sf::Texture texture;
 	sf::Sprite sprite;
 	sf::Vector2f increment;

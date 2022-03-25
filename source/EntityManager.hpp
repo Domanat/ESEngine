@@ -3,13 +3,10 @@
 
 #include <unordered_map>
 #include <functional>
-#include <fstream>
-#include <sstream>
-#include "SharedContext.hpp"
-#include "EntityBase.hpp"
+#include "Player.hpp"
+#include "Enemy.hpp"
 
-//#include "Player.hpp"
-//#include "Enemy.hpp"
+struct SharedContext;
 
 class EntityManager
 {

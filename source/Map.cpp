@@ -1,4 +1,5 @@
 #include "Map.hpp"
+#include "EntityManager.hpp"
 
 Map::Map(SharedContext* sharedContext, BaseState* currState) :
 	context(sharedContext), defaultTile(sharedContext), maxMapSize(32, 32),
@@ -162,10 +163,10 @@ void Map::LoadMap(const std::string& path)
 		std::cout << "Error opening file " + path << std::endl;
 		return;
 	}
-	//EntityManager* entityMgr = m_context->m_entityManager;
+	EntityManager* entityMgr = context->entityManager;
 	std::string line;
 
-
+	int playerId = -1;
 	while (std::getline(file, line))
 	{
 		if (line[0] == '|') 
@@ -260,6 +261,37 @@ void Map::LoadMap(const std::string& path)
 		else if (type == "NEXTMAP") 
 		{
 			keystream >> nextMap;
+		}
+		else if(type == "PLAYER")
+		{
+			if (playerId != -1){ continue; }
+			// Set up the player position here.
+			playerId = entityMgr->Add(EntityType::Player);
+
+			if (playerId < 0){ continue; }
+
+			float playerX = 0; float playerY = 0;
+			keystream >> playerX >> playerY;
+			entityMgr->Find(playerId)->SetPosition(playerX,playerY);
+
+			playerStart = sf::Vector2f(playerX, playerY);
+		} 
+		else if(type == "ENEMY")
+		{
+			std::string enemyName;
+			keystream >> enemyName;
+			int enemyId = entityMgr->Add(EntityType::Enemy, enemyName);
+
+			if (enemyId < 0){ continue; }
+
+			float enemyX = 0; float enemyY = 0;
+			keystream >> enemyX >> enemyY;
+			entityMgr->Find(enemyId)->SetPosition(enemyX, enemyY);
+		} 
+		else 
+		{
+			// Something else.
+			std::cout << "! Unknown type \"" << type << "\"." << std::endl;
 		}
 	}
 

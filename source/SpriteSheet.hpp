@@ -2,10 +2,9 @@
 #define SPRITE_SHEET_HPP
 
 #include "SFML/Graphics.hpp"
-#include "AnimationBase.hpp"
-#include "AnimationDirectional.hpp"
 #include "TextureManager.hpp"
-#include "Direction.hpp"
+#include "AnimationDirectional.hpp"
+#include "Utils.hpp"
 #include <fstream>
 
 class SpriteSheet

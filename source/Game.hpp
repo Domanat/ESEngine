@@ -25,6 +25,7 @@ private:
 	SharedContext sharedContext;
 	Window window;
 	StateManager stateManager;
+	EntityManager entityManager;
 	sf::Clock clock;
 	sf::Time elapsed;
 	sf::Vector2i speed;

@@ -1,6 +1,6 @@
 #include "Character.hpp"
 #include "EntityManager.hpp"
-#include "TextureManager.hpp"
+#include "StateManager.hpp"
 
 Character::Character(EntityManager* manager) :
 	EntityBase(manager),

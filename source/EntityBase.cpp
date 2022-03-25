@@ -1,7 +1,8 @@
 #include "EntityBase.hpp"
+#include "EntityManager.hpp"
 #include "SharedContext.hpp"
 #include "Map.hpp"
-#include "EntityManager.hpp"
+#include <cmath>
 
 EntityBase::EntityBase(EntityManager* entityMgr) :
 	entityManager(entityMgr), name("BaseEntity"),
@@ -11,6 +12,8 @@ EntityBase::EntityBase(EntityManager* entityMgr) :
 {
 	
 }
+
+EntityBase::~EntityBase() {}
 
 void EntityBase::SetPosition(float x, float y)
 {
@@ -43,7 +46,7 @@ void EntityBase::Move(float x, float y)
 	positionOld = position;
 	position += sf::Vector2f(x, y);
 
-	sf::Vector2u mapSize = entityManager->GetContext()->gameMap->GetMapSize();
+	sf::Vector2u mapSize = entityManager->GetSharedContext()->gameMap->GetMapSize();
 
 	if (position.x < 0)
 		position.x = 0;
@@ -255,3 +258,15 @@ void EntityBase::ResolveCollisions()
 	if (!collidingOnY)
 		referenceTile = nullptr;
 }
+
+void EntityBase::SetAcceleration(float x, float y) 
+{
+	acceleration = sf::Vector2f(x, y);
+}
+
+const sf::Vector2f& EntityBase::GetSize()const { return size; }
+std::string EntityBase::GetName()const { return name; }
+EntityState EntityBase::GetState()const { return state; }
+unsigned int EntityBase::GetId()const { return id; }
+EntityType EntityBase::GetType()const { return type; }
+const sf::Vector2f& EntityBase::GetPosition()const { return position; }

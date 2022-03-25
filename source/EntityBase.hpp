@@ -1,4 +1,6 @@
-#pragma once
+#ifndef ENTITY_BASE_HPP
+#define ENTITY_BASE_HPP
+
 #include <string>
 #include <SFML/System/Vector2.hpp>
 #include <SFML/Graphics/Rect.hpp>
@@ -86,3 +88,5 @@ protected:
 	std::vector<CollisionElement> collisions;
 	EntityManager* entityManager;
 };
+
+#endif

@@ -2,7 +2,8 @@
 
 Game::Game() :
 	window(sf::Vector2u(800, 600), "Window"),
-	stateManager(&sharedContext)
+	stateManager(&sharedContext),
+	entityManager(&sharedContext, 10)
 {
 	clock.restart();
 	srand(time(NULL));
@@ -25,7 +26,6 @@ void Game::Update()
 void Game::Render()
 {
 	window.BeginDraw();
-	//window.Draw(mushroom);
 	stateManager.Draw();
 	window.EndDraw();
 }

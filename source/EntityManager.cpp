@@ -1,4 +1,5 @@
 #include "EntityManager.hpp"
+#include "SharedContext.hpp"
 
 EntityManager::EntityManager(SharedContext* context, unsigned int maxEntities) :
 	sharedContext(context), maxEntities(maxEntities), idCounter(0)
@@ -14,7 +15,7 @@ EntityManager::~EntityManager()
 }
 
 
-int EntityManager::Add(const EntityType& type, const std::string& name = "")
+int EntityManager::Add(const EntityType& type, const std::string& name)
 {
 	auto itr = entityFactory.find(type);
 
