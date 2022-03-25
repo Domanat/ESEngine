@@ -13,6 +13,11 @@ namespace Utils
         std::string::size_type pos = std::string(buffer).find_last_of("\\/");
         return std::string(buffer).substr(0, pos);
     }
+
+    inline std::string GetResourceDirectory() 
+    {
+        return GetWorkingDirectory() + std::string("Resources/");
+    }
 }
 
 #endif

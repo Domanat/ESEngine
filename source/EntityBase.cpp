@@ -1,6 +1,7 @@
 #include "EntityBase.hpp"
 #include "SharedContext.hpp"
 #include "Map.hpp"
+#include "EntityManager.hpp"
 
 EntityBase::EntityBase(EntityManager* entityMgr) :
 	entityManager(entityMgr), name("BaseEntity"),
@@ -168,6 +169,7 @@ void EntityBase::CheckCollisions()
 
 	unsigned int tileSize = map->GetTileSize();
 
+	// Receive coordinates of tiles AABB intersects with
 	int fromX = floor(AABB.left / tileSize);
 	int toX = floor((AABB.left + AABB.width) / tileSize);
 	int fromY = floor(AABB.top / tileSize);
