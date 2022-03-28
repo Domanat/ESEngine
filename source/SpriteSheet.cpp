@@ -91,7 +91,7 @@ AnimationBase* SpriteSheet::GetCurrentAnimation() { return animationCurrent; }
 bool SpriteSheet::LoadSheet(const std::string& file)
 {
 	std::ifstream sheet;
-	sheet.open(Utils::GetWorkingDirectory() + file);
+	sheet.open(Utils::GetResourceDirectory() + file);
 
 	if (sheet.is_open())
 	{
@@ -125,7 +125,7 @@ bool SpriteSheet::LoadSheet(const std::string& file)
 				}
 
 				texture = newTexture;
-				sprite.setTexture(*textureManager->GetResources(texture));
+				sprite.setTexture(*textureManager->GetResource(texture));
 			}
 			else if (type == "Size")
 			{

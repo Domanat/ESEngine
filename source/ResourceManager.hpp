@@ -17,7 +17,7 @@ public:
 		LoadPaths(pathFile);
 	}
 
-	T* GetResources(const std::string& id)
+	T* GetResource(const std::string& id)
 	{
 		auto res = Find(id);
 		return (res ? res->first : nullptr);
@@ -104,7 +104,7 @@ private:
 	{
 		std::ifstream fileStream;
 
-		fileStream.open(Utils::GetWorkingDirectory() + pathString);
+		fileStream.open(Utils::GetResourceDirectory() + pathString);
 
 		if (fileStream.is_open())
 		{

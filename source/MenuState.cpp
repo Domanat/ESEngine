@@ -13,7 +13,7 @@ MenuState::~MenuState()
 
 void MenuState::OnCreate()
 {
-	font.loadFromFile("arial.ttf");
+	font.loadFromFile(Utils::GetResourceDirectory() + "media\\Fonts\\arial.ttf");
 	text.setFont(font);
 	text.setString(sf::String("MAIN MENU"));
 	text.setCharacterSize(18);

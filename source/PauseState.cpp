@@ -14,7 +14,7 @@ PauseState::~PauseState()
 void PauseState::OnCreate()
 {
 	SetTransparent(true);
-	font.loadFromFile("arial.ttf");
+	font.loadFromFile(Utils::GetResourceDirectory() + "media\\Fonts\\arial.ttf");
 	text.setFont(font);
 	text.setString(sf::String("PAUSED"));
 	text.setCharacterSize(14);

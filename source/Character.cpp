@@ -64,7 +64,7 @@ void Character::Load(const std::string& path)
 {
 	std::ifstream file;
 
-	file.open(Utils::GetResourceDirectory() + std::string("media/Characters/") + path);
+	file.open(Utils::GetResourceDirectory() + std::string("media\\Characters\\") + path);
 	
 	if (!file.is_open()) 
 	{
@@ -90,7 +90,7 @@ void Character::Load(const std::string& path)
 		{
 			std::string path;
 			keystream >> path;
-			spriteSheet.LoadSheet("media/Spritesheets/" + path);
+			spriteSheet.LoadSheet("media\\Spritesheets\\" + path);
 		}
 		else if (type == "Hitpoints") 
 		{

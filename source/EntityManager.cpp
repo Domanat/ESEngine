@@ -167,7 +167,7 @@ void EntityManager::EntityCollisionCheck()
 void EntityManager::LoadEnemyTypes(const std::string& name)
 {
 	std::ifstream file;
-	file.open(Utils::GetWorkingDirectory() + std::string("media/characters/") + name);
+	file.open(Utils::GetResourceDirectory() + std::string("media\\Characters\\") + name);
 
 	if (!file.is_open())
 	{

@@ -26,12 +26,12 @@ struct TileInfo
 			return;
 		}
 
-		if (!textureManager->GetResources(texture))
+		if (!textureManager->GetResource(texture))
 			return;
 
 		this->texture = texture;
 		this->id = id;
-		sprite.setTexture(*textureManager->GetResources(texture));
+		sprite.setTexture(*textureManager->GetResource(texture));
 		sf::IntRect tileBoundaries(this->id % (Sheet::SheetWidth / Sheet::TileSize) * Sheet::TileSize,
 			this->id / (Sheet::SheetHeight / Sheet::TileSize) * Sheet::TileSize,
 			Sheet::TileSize, Sheet::TileSize);

@@ -5,14 +5,20 @@ Game::Game() :
 	stateManager(&sharedContext),
 	entityManager(&sharedContext, 10)
 {
+	std::cout << Utils::GetResourceDirectory() << std::endl;
+
 	clock.restart();
 	srand(time(NULL));
 
 	sharedContext.window = &window;
 	sharedContext.eventManager = window.GetEventManager();
+
+	sharedContext.window = &window;
+	sharedContext.eventManager = window.GetEventManager();
+	sharedContext.textureManager = &textureManager;
+	sharedContext.entityManager = &entityManager;
 	
 	stateManager.SwitchTo(StateType::Intro);
-	speed = sf::Vector2i(400, 400);
 }
 
 Game::~Game() { }

@@ -8,6 +8,7 @@ Map::Map(SharedContext* sharedContext, BaseState* currState) :
 {
 	context->gameMap = this;
 	LoadTiles("tiles.cfg");
+
 }
 
 Map::~Map()
@@ -37,7 +38,7 @@ void Map::Update(float dt)
 
 		if (nextMap != "")
 		{
-			LoadMap("media/maps/" + nextMap);
+			LoadMap("media/Maps/" + nextMap);
 		}
 		else
 		{
@@ -96,7 +97,7 @@ void Map::PurgeMap()
 	}
 
 	tileMap.clear();
-	//context->entityManager->Purge();
+	context->entityManager->Purge();
 	
 	if (backgroundTexture == "")
 		return;
@@ -118,7 +119,7 @@ void Map::PurgeTileSet()
 void Map::LoadTiles(const std::string& path)
 {
 	std::ifstream file;
-	file.open(Utils::GetWorkingDirectory() + path);
+	file.open(Utils::GetResourceDirectory() + path);
 
 	if (!file.is_open())
 	{
@@ -151,12 +152,15 @@ void Map::LoadTiles(const std::string& path)
 	}
 
 	file.close();
+
+	std::cout << "Number of tiles: " << tileSet.size() << std::endl;
 }
 
 void Map::LoadMap(const std::string& path)
 {
 	std::ifstream file;
-	file.open(Utils::GetWorkingDirectory() + path);
+
+	file.open(Utils::GetResourceDirectory() + path);
 
 	if (!file.is_open())
 	{
@@ -236,7 +240,7 @@ void Map::LoadMap(const std::string& path)
 				continue;
 			}
 
-			sf::Texture* texture = context->textureManager->GetResources(backgroundTexture);
+			sf::Texture* texture = context->textureManager->GetResource(backgroundTexture);
 			background.setTexture(*texture);
 
 			sf::Vector2f viewSize = currentState->GetView().getSize();
@@ -245,6 +249,7 @@ void Map::LoadMap(const std::string& path)
 			scaleFactors.x = viewSize.x / textureSize.x;
 			scaleFactors.y = viewSize.y / textureSize.y;
 			background.setScale(scaleFactors);
+			std::cout << "Background texture has been set up" << std::endl;
 		}
 		else if (type == "SIZE") 
 		{

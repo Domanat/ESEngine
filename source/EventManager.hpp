@@ -9,6 +9,7 @@
 #include <fstream>
 #include <sstream>
 #include <iostream>
+#include "Utils.hpp"
 
 /*
 * Config example

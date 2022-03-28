@@ -22,7 +22,7 @@ void GameState::OnCreate()
 	stateManager->GetSharedContext()->window->GetRenderWindow()->setView(view);
 
 	gameMap = new Map(stateManager->GetSharedContext(), this);
-	gameMap->LoadMap("media/maps/map1.map");
+	gameMap->LoadMap("media\\Maps\\map1.map");
 }
 
 void GameState::OnDestroy()
@@ -68,7 +68,8 @@ void GameState::Update(const sf::Time& time)
 
 void GameState::Draw()
 {
-	stateManager->GetSharedContext()->window->GetRenderWindow()->draw(sprite);
+	gameMap->Draw();
+	stateManager->GetSharedContext()->entityManager->Draw();
 }
 
 void GameState::MainMenu(EventDetails* details)

@@ -1,8 +1,11 @@
 #ifndef GAME_HPP
 #define GAME_HPP
 
+#include "Window.hpp"
+#include "EventManager.hpp"
 #include "StateManager.hpp"
-#include "SharedContext.hpp"
+#include "TextureManager.hpp"
+#include "EntityManager.hpp"
 #include <iostream>
 
 class Game 
@@ -22,12 +25,12 @@ public:
 
 private:
 
-	SharedContext sharedContext;
-	Window window;
-	StateManager stateManager;
-	EntityManager entityManager;
 	sf::Clock clock;
 	sf::Time elapsed;
-	sf::Vector2i speed;
+	SharedContext sharedContext;
+	Window window;
+	EntityManager entityManager;
+	TextureManager textureManager;
+	StateManager stateManager;
 };
 #endif
