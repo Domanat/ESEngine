@@ -53,11 +53,13 @@ void GameState::Update(const sf::Time& time)
 	}
 
 	sf::FloatRect viewSpace = context->window->GetViewSpace();
-	if (viewSpace.left <= 0) {
+	if (viewSpace.left <= 0) 
+	{
 		view.setCenter(viewSpace.width / 2, view.getCenter().y);
 		context->window->GetRenderWindow()->setView(view);
 	}
-	else if (viewSpace.left + viewSpace.width > (gameMap->GetMapSize().x + 1) * Sheet::TileSize) {
+	else if (viewSpace.left + viewSpace.width > (gameMap->GetMapSize().x + 1) * Sheet::TileSize) 
+	{
 		view.setCenter(((gameMap->GetMapSize().x + 1) * Sheet::TileSize) - (viewSpace.width / 2), view.getCenter().y);
 		context->window->GetRenderWindow()->setView(view);
 	}

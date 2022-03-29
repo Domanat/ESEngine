@@ -17,6 +17,9 @@ public:
 		LoadPaths(pathFile);
 	}
 
+
+	virtual ~ResourceManager() { PurgeResources(); }
+
 	T* GetResource(const std::string& id)
 	{
 		auto res = Find(id);
@@ -51,6 +54,7 @@ public:
 		}
 
 		resources.emplace(id, std::make_pair(resource, 1));
+		std::cout << "Number of textures: " << resources.size() << std::endl;
 		return true;
 	}
 
@@ -75,12 +79,12 @@ public:
 		}
 	}
 
+protected:
 	T* Load(const std::string& path)
 	{
 		return static_cast<Derived*>(this)->Load(path);
 	}
 
-	virtual ~ResourceManager() { PurgeResources(); }
 
 private:
 	std::pair<T*, unsigned int>* Find(const std::string& id)
@@ -121,6 +125,8 @@ private:
 			}
 
 			fileStream.close();
+			
+
 			return;
 		}
 

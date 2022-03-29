@@ -5,7 +5,6 @@ Game::Game() :
 	stateManager(&sharedContext),
 	entityManager(&sharedContext, 10)
 {
-	std::cout << Utils::GetResourceDirectory() << std::endl;
 
 	clock.restart();
 	srand(time(NULL));

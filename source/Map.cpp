@@ -9,6 +9,9 @@ Map::Map(SharedContext* sharedContext, BaseState* currState) :
 	context->gameMap = this;
 	LoadTiles("tiles.cfg");
 
+	sf::FloatRect viewSpace = context->window->GetViewSpace();
+
+	std::cout << "View's space: " << viewSpace.left << " : " << viewSpace.top << std::endl;
 }
 
 Map::~Map()
@@ -85,6 +88,8 @@ void Map::Draw()
 			++count;
 		}
 	}
+
+
 }
 
 void Map::PurgeMap()
@@ -148,6 +153,11 @@ void Map::LoadTiles(const std::string& path)
 		{
 			std::cout << "Duplicate file type: " << tile->name << std::endl;
 			delete tile;
+		}
+
+		for (auto& itr : tileSet)
+		{
+			std::cout << "TileId: " << itr.first << " : " << itr.second->name << std::endl;
 		}
 	}
 
@@ -299,6 +309,8 @@ void Map::LoadMap(const std::string& path)
 			std::cout << "! Unknown type \"" << type << "\"." << std::endl;
 		}
 	}
+
+	std::cout << "Tile map: " << tileMap.size() << std::endl;
 
 	file.close();
 }

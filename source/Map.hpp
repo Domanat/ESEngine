@@ -15,23 +15,28 @@ enum Sheet {TileSize = 32, SheetWidth = 256, SheetHeight = 256};
 
 struct TileInfo
 {
-	TileInfo(SharedContext* context, const std::string& texture = "", int id = 0) :
-		context(context), id(0), deadly(false)
+	TileInfo(SharedContext* sharedContext, const std::string& tileTexture = "", int newId = 0) :
+		context(sharedContext), id(0), deadly(false)
 	{
-		TextureManager* textureManager = context->textureManager;
+		TextureManager* textureManager = sharedContext->textureManager;
 
-		if (texture == "")
+		if (tileTexture == "")
 		{
-			this->id = id;
+			std::cout << "Add tile " << newId << std::endl;
+			this->id = newId;
 			return;
 		}
 
-		if (!textureManager->GetResource(texture))
+		if (!textureManager->GetResource(tileTexture))
+		{
+			std::cout << "No resource " << tileTexture << std::endl;
 			return;
+		}
+			
+		this->texture = tileTexture;
+		this->id = newId;
 
-		this->texture = texture;
-		this->id = id;
-		sprite.setTexture(*textureManager->GetResource(texture));
+		sprite.setTexture(*textureManager->GetResource(this->texture));
 		sf::IntRect tileBoundaries(this->id % (Sheet::SheetWidth / Sheet::TileSize) * Sheet::TileSize,
 			this->id / (Sheet::SheetHeight / Sheet::TileSize) * Sheet::TileSize,
 			Sheet::TileSize, Sheet::TileSize);
@@ -44,7 +49,7 @@ struct TileInfo
 		if (this->texture == "")
 			return;
 
-		context->textureManager->ReleaseResource(texture);
+		context->textureManager->ReleaseResource(this->texture);
 	}
 
 	sf::Sprite sprite;
